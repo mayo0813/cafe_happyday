@@ -111,6 +111,7 @@ table.sum{width:100%;border-collapse:collapse;margin-bottom:18px;font-size:16px}
 #rcpt .panel div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dotted #ccc}
 #home{background:#16110f;color:#d8ccc2;flex-direction:column;justify-content:flex-start;padding:0}
 #room{position:relative;width:100%;height:56%;background:linear-gradient(#211915,#16110f)}
+#notiTxt{white-space:pre-line}
 #mono{padding:18px 22px;font-size:16px;line-height:1.8;width:100%;min-height:120px}
 #mono p{margin:0;opacity:0;transition:opacity .35s}
 #tapHint{position:absolute;right:22px;bottom:18px;font-size:12px;color:#7a6d62;animation:blink 1s steps(2) infinite}
@@ -260,7 +261,7 @@ const DAYS={
  {time:'21:50',name:'곰 손님',look:'bear',order:'혹시 아직 주문 되죠? 아이스 아메리카노요.',recipe:['shot','water','ice'],price:4500,menu:'아이스 아메리카노',thanks:'늦게 죄송해요, 감사합니다.'}],
  jinRemake:['야, 얼음이 왜 이렇게 많아? 다시 해.','이거 아니잖아. 귀 먹었어?'],
  jin:()=>['여기 몇 년째 다니는데, 처음 보는 얼굴이네?','표정이 왜 그래? 웃어.','NAME','요즘 애들은 서비스 정신이 없어.','사장 번호 뭐야? 어?'],
- whisper:a=>a>=70?'……너, 잘 웃네.':'……너, 표정 관리 좀 하지.',
+ whisper:a=>a>=70?'……잘 웃네.':'……표정 관리 좀 하지.',
  unread:3,mono:()=>['첫날치곤 나쁘지 않았다.','그 손님만 빼면.','내일은 더 잘 웃어야지.']},
 2:{dist:0,wd:'수',boss:[()=>'어제 고생 많았죠? 오늘도 잘 부탁해요.',()=>'아, 어제 그 손님… 오늘도 올 거예요. 늘 오시거든요.',()=>'그냥 웃어요. 알죠? :)'],
  cust:[
@@ -273,7 +274,7 @@ const DAYS={
  {time:'21:50',name:'곰 손님',look:'bear',cctv:'bear',order:'혹시 아직 주문 되죠? 아이스 아메리카노요.',recipe:['shot','water','ice'],price:4500,menu:'아이스 아메리카노',thanks:'늦게 죄송해요, 감사합니다.'}],
  jinRemake:['야, 얼음이 왜 이렇게 적어? 다시 해.','이거 아니잖아. 귀 먹었어?'],
  jin:()=>['또 너야? 어제 그 표정 그대로네.','표정이 왜 그래? 더 웃어.','오늘도 명찰 안 달았네?','요즘 애들은 서비스 정신이 없어.','너 번호 뭐야? 어?'],
- whisper:a=>a>=70?'……너, 오늘도 잘 웃네.':'……어제보다 못 웃네.',
+ whisper:a=>a>=70?'……오늘도 잘 웃네.':'……어제보다 못 웃네.',
  unread:4,notiTime:'22:37',mono:()=>['오늘도 그 손님이 왔다.','다신 안 온다더니.','근데 왜 나만 보고 있었지?','…어제 말해줬었나.']},
 3:{dist:1,wd:'목',decay:4,boss:[()=>'오늘 좀 피곤해 보이네요?',()=>'그 손님이요? 오늘도 오실 거예요. 늘 같은 시간에.',()=>`…웃는 거 정말 잘하네요, ${nm()} 씨.`],
  cust:[
@@ -334,14 +335,14 @@ const DAYS={
  {time:'17:00',name:'고양이 직장인',look:'cat',cctv:'cat',order:'따뜻한 카페라떼요.',recipe:['shot','milk'],price:4500,menu:'카페라떼',thanks:'수고하셨어요.'},
  {time:'19:40',name:'다람쥐 학생',look:'squirrel',cctv:'squirrel',order:'아이스 아메리카노 샷 추가요. …오늘 마지막이에요?',recipe:['shot','shot','water','ice'],price:5000,menu:'아이스 아메리카노 (샷 추가)',thanks:'…잘 지내요.'},
  {time:'21:50',name:'곰 손님',look:'bear',cctv:'bear',order:'아이스 아메리카노요. 오늘은 일찍 왔어요.',recipe:['shot','water','ice'],price:4500,menu:'아이스 아메리카노',thanks:'그동안 고마웠어요.'}],
- unread:1,noti:()=>'[사장님] 그동안 고마웠어요. 내일부터 안 나와도 돼요.',notiTime:'22:14',nextLabel:'다음 날',
+ unread:1,noti:()=>`[사장님] 그동안 고마웠어요. 내일부터 안 나와도 돼요.\n[마음숲의원] ${nm()}님, 내일 오후 2시 예약 확인 부탁드립니다.`,notiTime:'22:14',nextLabel:'다음 날',
  mono:()=>['오늘은 아무 일도 없었다.','손님들 얼굴이 잘 기억나지 않는다.','사장님이 내일부터 안 나와도 된다고 했다.','…그럼 내일은 손님으로 가야지.']},
-8:{dist:0,wd:'화',newbie:1,loop:1,melt:1,noCard:1,bye:'……또 올게.',boss:[()=>'오늘부터 잘 부탁해요, 신입 씨!',()=>'주문 들으면 아래 재료를 눌러서 컵에 담고, 서빙하기를 누르면 돼요. 레시피는 카운터에 붙여놨어요.',()=>'아, 가끔 좀… 까다로운 손님도 와요. 그럴 땐 그냥 웃어요. 웃으면 다 지나가요 :)'],
- cust:[{time:'15:10',name:'돼지 손님',look:'raccoon',cctv:'self',jin:1,order:'아아.',recipe:['shot','water','ice'],price:4500,menu:'아이스 아메리카노',rc:'아이스 아메리카노 · 재제조 1'}],
+8:{dist:0,wd:'화',newbie:1,loop:1,melt:1,noCard:1,bye:'……도망쳐.',boss:[()=>'오늘부터 잘 부탁해요, 신입 씨!',()=>'주문 들으면 아래 재료를 눌러서 컵에 담고, 서빙하기를 누르면 돼요. 레시피는 카운터에 붙여놨어요.',()=>'아, 가끔 좀… 까다로운 손님도 와요. 그럴 땐 그냥 웃어요. 웃으면 다 지나가요 :)'],
+ cust:[{time:'15:10',name:'돼지 손님',look:'raccoon',cctv:'raccoon',jin:1,order:'아아.',recipe:['shot','water','ice'],price:4500,menu:'아이스 아메리카노',rc:'아이스 아메리카노 · 재제조 1'}],
  jinRemake:['야, 얼음이 왜 이렇게 많아? 다시 해.','이거 아니잖아. 귀 먹었어?'],
- jin:()=>['여기 몇 년째 다니는데, 처음 보는 얼굴이네?','표정이 왜 그래? 웃어.','웃어. 웃으면 다 지나가.','……나처럼.'],
- jinWho:[null,null,'돼지… 손…','나'],
- whisper:()=>'……다음은 너야.'}
+ jin:()=>['여기 몇 년째 다니는데, 처음 보는 얼굴이네?','표정이 왜 그래? 웃어.','웃어. 웃으면 다 지나간대.','……안 지나가.'],
+ jinWho:[null,null,'돼지… 손…','전 알바생'],
+ whisper:()=>'……웃지 마.'}
 };
 
 /* 진상 유형 */
@@ -360,7 +361,15 @@ const JT={
    '21:50':{type:'refund',refund:['얼음이 너무 많아서 양이 적잖아요.','다 마시긴 했는데, 그래도요.','환불해 줘요. 지금.']}},
 5:{'15:00':{type:'phone',mumble:'(통화 중) …응, 그 알바. 또 웃고 있어. …아 저기요. …아니, 진짜 계속 웃는다니까.',real:'바닐라라떼 하나요.'}}
 };
+const JT2={2:{'17:15':{type:'redo',order:'음… 뭐가 맛있어요? 그냥 알아서 시원한 걸로 주세요.',redo:'아… 이건 좀 쓰네요. 그냥 아이스 라떼로 해주실래요?',alt:['shot','milk','ice'],altMenu:'아이스 카페라떼',altPrice:4500}},
+ 3:{'18:40':{type:'redo',order:'아이스 아메리카노요. 얼음은 딱 세 개만, 샷은 연하게, 물은 반만요.',redo:'얼음 세 개라고 했는데… 아 됐어요, 그냥 다시 해주세요.'}},
+ 4:{'17:30':{type:'redo',order:'저번에 먹었던 거요. 아 이름이 뭐였더라… 그 하얀 거.',redo:'이거 아닌데. 그 왜, 바닐라 들어간 따뜻한 거요.',alt:['shot','milk','syrup'],altMenu:'바닐라라떼',altPrice:5000}},
+ 5:{'17:20':{type:'redo',order:'아메리카노 하나요. 뜨겁지 않게, 근데 차갑지도 않게요.',redo:'…아 이건 좀 차갑네요. 따뜻한 걸로 다시요.',alt:['shot','water'],altMenu:'아메리카노',altPrice:4000}}};
+for(const d in JT2)for(const c of DAYS[d].cust)if(JT2[d][c.time])Object.assign(c,JT2[d][c.time]);
 for(const d in JT)for(const c of DAYS[d].cust)if(JT[d][c.time])Object.assign(c,JT[d][c.time]);
+// 주인공 속마음 — 손님은 별일 안 하는데 나만 점점 날카로워짐
+const INNER={1:['…괜찮아.','웃자, 웃자.'],2:['아 진짜…','왜 꼭 나한테.'],3:['그냥 좀 빨리 말해.','짜증나.'],4:['입 좀 다물어.','다 짜증나.','왜 웃어.'],5:['조용히 해.','시끄러워. 시끄러워.','다 꺼져버렸으면.'],6:['……시끄러워.','다 꺼져버렸으면.'],7:['……','다 꺼져.']};
+async function inner(delay){const c=S.c;await wait(delay||1600);if(S.c!==c||!INNER[S.day])return;const P=INNER[S.day],m=$('mine');m.textContent=P[Math.random()*P.length|0];m.classList.add('on');await wait(1500);m.classList.remove('on')}
 /* 하루 길이 줄이기 */
 const KEEP={1:['15:10','16:05','17:20','18:40','20:45'],2:['15:05','16:10','17:15','18:40','20:40'],3:['15:10','17:05','18:40','19:40','20:50'],4:['15:00','15:50','17:30','18:40','21:50'],5:['15:00','17:20','18:40','19:30'],7:['15:10','19:40','21:50']};
 for(const d in KEEP)DAYS[d].cust=DAYS[d].cust.filter(c=>KEEP[d].includes(c.time));
@@ -482,7 +491,8 @@ function humanSp(kind,arm,back,face){const k=kind+'|'+(arm?1:0)+(back?'b':'')+(f
  for(const L0 of layers){if(L0.ol)for(const kk of L0.m.keys()){const x=kk%SW,y=(kk/SW)|0;for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,ny=y+dy;if(nx<0||ny<0||nx>=SW||ny>=SH)continue;const nk=ny*SW+nx;if(!L0.m.has(nk)&&!g[nk])g[nk]=HOL}}
   for(const [kk,c] of L0.m)g[kk]=c}
  if(!back){const E=(x,y,c)=>{g[y*SW+x]=c};const f=face||'';
-  if(f==='fixed'||(f===''&&h.smile)){E(6,10,HOL);E(6,11,HOL);E(13,10,HOL);E(13,11,HOL);E(6,13,HOL);E(13,13,HOL);for(let x=7;x<=12;x++)E(x,14,HOL)}
+  if(f==='void'){for(const x of[5,6,13,14])for(const y of[9,10,11])E(x,y,'#000000')}
+  else if(f==='fixed'||(f===''&&h.smile)){E(6,10,HOL);E(6,11,HOL);E(13,10,HOL);E(13,11,HOL);E(6,13,HOL);E(13,13,HOL);for(let x=7;x<=12;x++)E(x,14,HOL)}
   else{E(6,10,HOL);E(6,11,HOL);E(13,10,HOL);E(13,11,HOL);
    if(f==='s1'){E(9,13,HOL);E(10,13,HOL)}else if(f==='s2'){E(8,13,HOL);E(9,14,HOL);E(10,14,HOL);E(11,13,HOL)}else if(f==='s3'){E(7,13,HOL);E(8,14,HOL);E(9,14,HOL);E(10,14,HOL);E(11,14,HOL);E(12,13,HOL)}else if(f==='wide'){E(4,12,HOL);E(15,12,HOL);E(5,13,HOL);E(14,13,HOL);for(let x=6;x<=13;x++)E(x,14,HOL)}}
   if(h.blush){E(5,12,'#f5a0a6');E(14,12,'#f5a0a6')}
@@ -503,7 +513,7 @@ const BULB=['#ffd36e','#ff9e8a','#8fd3bf','#b9a3ff'];
 function dist(){return (S&&DAYS[S.day]&&DAYS[S.day].dist)||0}
 // 두 색 점묘 (적갈색/뼈색, 4×4 베이어)
 const BAY=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5],DK=[61,10,12],LT=[230,239,233];
-function dither2(c,w,h){const im=c.getImageData(0,0,w,h),a=im.data;for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=(y*w+x)*4,l=(a[i]*.3+a[i+1]*.59+a[i+2]*.11)/255;const th=(BAY[(y&3)*4+(x&3)]+.5)/16;const l2=Math.max(0,Math.min(1,(l-.6)/.38));const o=l2>th?LT:DK;a[i]=o[0];a[i+1]=o[1];a[i+2]=o[2]}c.putImageData(im,0,0)}
+function dither2(c,w,h,lo=.6,rg=.38){const im=c.getImageData(0,0,w,h),a=im.data;for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=(y*w+x)*4,l=(a[i]*.3+a[i+1]*.59+a[i+2]*.11)/255;const th=(BAY[(y&3)*4+(x&3)]+.5)/16;const l2=Math.max(0,Math.min(1,(l-lo)/rg));const o=l2>th?LT:DK;a[i]=o[0];a[i+1]=o[1];a[i+2]=o[2]}c.putImageData(im,0,0)}
 // "웃었다." 클로즈업 — 두 색 점묘 사실적 얼굴, 찢어진 미소
 function drawCloseup(cv,k){const w=100,h=125,x=cv.getContext('2d'),im=x.createImageData(w,h),a=im.data;
  for(let py=0;py<h;py++)for(let px=0;px<w;px++){const jx=Math.random()<.03?1:0,u=(px+jx-50)/50,v=(py-60)/50;
@@ -578,6 +588,10 @@ function drawScene(t){const d=dist(),c=sx;c.imageSmoothingEnabled=false;
  if(d>=2){if(SC.dead.length<d*6&&Math.random()<.02)SC.dead.push([(Math.random()*VW)|0,(Math.random()*VH)|0]);c.fillStyle='#120f14';SC.dead.forEach(([x,y])=>c.fillRect(x,y,1,1))}
  if(d>=4){for(let i=0;i<(d>=5?60:20);i++){c.fillStyle=Math.random()<.5?'rgba(0,0,0,.35)':'rgba(255,255,255,.25)';c.fillRect((Math.random()*VW)|0,(Math.random()*VH)|0,1,1)}}
  if(d>=1&&(t%2900)<(d>=4?500:140)){const y=(Math.random()*VH)|0,h=1+(Math.random()*3|0),img=c.getImageData(0,y,VW,h);c.putImageData(img,(Math.random()<.5?-1:1)*(2+(Math.random()*d*2|0)),y)}
+ // 던진 카드
+ if(SC.card){const el=t-SC.card.t0,cx=VW/2+5,cy=VH-14,tx=VW/2-9,ty=VH-7;if(el>3400)SC.card=null;else{let x,y,fl=0;if(el<420){const p=el/420;x=cx+(tx-cx)*p;y=cy+(ty-cy)*p-Math.sin(p*Math.PI)*9;fl=(el/70|0)%2}else{if(!SC.card.hit){SC.card.hit=1;snd(160,.07,'square',.09);snd(90,.12,'triangle',.08)}x=tx;y=ty-(el<520?1:0)}
+  x=Math.round(x);y=Math.round(y);c.fillStyle='#1e1a22';c.fillRect(x-1,y-1,fl?5:9,fl?6:5);c.fillStyle='#4a63c8';c.fillRect(x,y,fl?3:7,fl?4:3);if(!fl){c.fillStyle='#ffd84d';c.fillRect(x+1,y+1,2,1)}
+  if(el>420&&el<900){c.fillStyle='#ffffff';c.fillRect(x-3,y-2,1,1);c.fillRect(x+9,y-2,1,1);c.fillRect(x+3,y-4,1,1)}}}
  if(d>=4)dither2(c,VW,VH);
 }
 const cam=document.getElementById('cam'),cx2=cam.getContext('2d');cam.width=40;cam.height=32;
@@ -587,10 +601,16 @@ function drawCam(t){const c=cx2,d=dist();c.fillStyle='#3a3a3a';c.fillRect(0,0,40
  {const nb=DAYS[S.day]&&DAYS[S.day].newbie,kind=nb?'newbie':d>=3?'self':'calm',arm=SC.cam2?1:(d>=1&&!nb)?0:serving?1:0,face=(!nb&&d===2)?'fixed':undefined;
   const gone=!nb&&d>=3&&!SC.cam2&&(t%7300)<1200;if(!gone)full(humanSp(kind,arm,0,face),c,19,0,1,2,19)}
  c.fillStyle='#8a8a8a';c.fillRect(0,17,40,1);c.fillStyle='#5c5c5c';c.fillRect(0,18,40,4);c.fillStyle='#6c6c6c';c.fillRect(0,22,40,10);
- let g=null;if(SC.look&&SC.feed==='animal')g=sprite(SC.look,'back');else if(SC.look&&SC.feed&&SC.feed!=='empty')g=humanSp(SC.feed,0,1);
+ const sil=(g,ox,oy,y0,y1,col)=>{for(let yy=y0;yy<Math.min(y1,g.h);yy++)for(let xx=0;xx<g.w;xx++)if(g[yy*g.w+xx]){c.fillStyle=col;c.fillRect(ox+xx,oy+yy-y0,1,1)}};
+ const nb0=DAYS[S.day]&&DAYS[S.day].newbie;
+ // 내 뒤에 서 있는 긴 머리 형체
+ if(!nb0&&d>=2&&(t%11000)<(d>=4?2200:900))sil(humanSp('self',0,1),29,-1,2,18,'#141414');
+ // 없는 줄 — 손님 뒤에 늘어선 사람들
+ if(!nb0&&d>=4&&SC.look){[[-14,10,'#2b2b2b'],[-6,11,'#262626']].forEach(([x,y,col])=>sil(humanSp('calm',0,1),x+(t/1500|0)%2*0,y,0,22,col))}
+ let g=null,turned=false;if(SC.look&&SC.feed==='animal')g=sprite(SC.look,'back');else if(SC.look&&SC.feed&&SC.feed!=='empty'){turned=!nb0&&d>=3&&!SC.dir&&(t%6100)<(d>=4?1800:900);g=humanSp(SC.feed,0,turned?0:1,turned?'void':undefined)}
  if(g){const e=SC.dir?Math.min(1,(t-SC.t0)/650):1;const ox=(g.w===AW?-3:-1)+(SC.dir==='in'?-Math.round((1-e)*22):SC.dir==='out'?Math.round(e*42):0);full(g,c,ox,8,1,0,24)}
  for(let yy=0;yy<32;yy+=2){c.fillStyle='rgba(0,0,0,.22)';c.fillRect(0,yy,40,1)}
- if(d>=4)dither2(c,40,32);
+ if(d>=4)dither2(c,40,32,.12,.55);
  for(let i=0;i<(d>=4?30:8);i++){c.fillStyle=Math.random()<.5?'rgba(0,0,0,.3)':'rgba(255,255,255,.18)';c.fillRect((Math.random()*40)|0,(Math.random()*32)|0,1,1)}
  c.fillStyle='#ddd';c.fillRect(1,1,1,3);c.fillRect(3,1,1,3);c.fillRect(2,1,1,1);c.fillRect(2,3,1,1);c.fillRect(6,1,1,3);
  if((t/500|0)%2){c.fillStyle='#ff4444';c.fillRect(37,1,2,2)}
@@ -686,15 +706,16 @@ async function next(){
  S.c=Object.assign({},list[S.i]);S.cup=[];drawCup();S.c.stage=0;S.c.retry=0;
  $('clock').textContent=D().wd+' '+S.c.time;
  if(S.c.cam2&&!S.cam2){S.cam2=1;SC.cam2=1;setTimeout(()=>{const w=$('whisper');w.textContent='……저기 봐.';w.classList.add('on');setTimeout(()=>w.classList.remove('on'),1400)},2500)}
- setFace(D().allSmile?'happy':S.c.jin&&!D().jinDirect?'angry':'neutral');SC.drips=[];SC.dir='in';SC.t0=performance.now();SC.inT=SC.t0;bell(S.c.jin);
+ setFace(D().allSmile?'happy':S.c.jin&&!D().jinDirect?'angry':'neutral');SC.drips=[];SC.card=null;SC.dir='in';SC.t0=performance.now();SC.inT=SC.t0;bell(S.c.jin);
  await wait(600);S.patMax=S.c.jin?16:S.c.type==='hurry'?13:30;S.pat=S.patMax;say(S.c.type==='phone'?S.c.mumble:S.c.order);S.phase='order';
  if(S.c.flick)flicker(S.c,S.c.flick);
+ if((S.c.type||S.c.jin)&&!D().newbie&&!D().selftalk)inner(S.c.jin?2600:1900);
  if(S.c.sflick)sflicker(S.c,S.c.sflick);
 }
 async function smileLite(lines){S.phase='smile';$('controls').style.display='none';$('smile').classList.add('on');let sum=0,n=0;sv=0;
  const lp=setInterval(()=>{sv=D().auto?(hold?Math.max(62,sv-3):Math.min(100,sv+6)):hold?Math.min(100,sv+7):Math.max(0,sv-(D().decay||10));drawMe(meV(sv));$('gauge').firstElementChild.style.width=sv+'%';sum+=sv;n++},50);
  for(const l of lines){say(l);snd(150,.22,'sawtooth',.045);await wait(2400)}
- clearInterval(lp);const avg=n?sum/n:0;S.sat-=Math.round((100-avg)*.15)+3;$('smile').classList.remove('on');$('controls').style.display='';drawMe(0);hud();return avg}
+ clearInterval(lp);const avg=n?sum/n:0;recSmile(avg);S.sat-=Math.round((100-avg)*.15)+3;$('smile').classList.remove('on');$('controls').style.display='';drawMe(0);hud();return avg}
 async function refundEvt(c){await wait(1500);if(S.c!==c)return;setFace('angry');snd(140,.3,'sawtooth',.05);await smileLite(c.refund);S.money-=c.price;const r=S.rcpt[S.rcpt.length-1];if(r)r[2]+=' · 환불 (다 마심)';say('…됐어요.');hud();S.phase='idle';leave()}
 function couponEvt(c){const ch=$('choice');ch.innerHTML=`<button class="btn" data-a="1">${c.optA}</button><button class="btn" data-a="0">${c.optB}</button>`;ch.classList.add('on');
  ch.onclick=e=>{const b=e.target.closest('button');if(!b)return;ch.classList.remove('on');ch.onclick=null;
@@ -724,6 +745,7 @@ $('serve').onclick=()=>{
   if(S.c.stage===0){S.c.stage=1;setFace('angry');say(D().jinRemake[ok?0:1]);snd(140,.35,'sawtooth',.05);S.pat=S.patMax;S.c.nag=1;return}
   return smilePhase();
  }
+ if(S.c.type==='redo'&&!S.c.rd){S.c.rd=1;S.c.order=S.c.redo;setFace('neutral');say(S.c.redo);snd(260,.15,'triangle');S.pat=S.patMax;if(S.c.alt){S.c.recipe=S.c.alt;S.c.menu=S.c.altMenu;S.c.price=S.c.altPrice}S.c.rcAdd=' · 재제조 1';inner(900);return}
  if(ok&&S.c.type==='complain'&&!S.c.fc){S.c.fc=1;setFace('angry');say(S.c.complain);snd(160,.3,'sawtooth',.05);S.pat=S.patMax;S.c.rcAdd=' · 재제조 1 (요청사항 없었음)';return}
  if(ok&&S.c.type==='refund'){S.phase='idle';setFace('neutral');pay(0);say(S.c.thanks||'…');hud();return refundEvt(S.c)}
  if(ok&&S.c.type==='coupon'){S.phase='idle';setFace('neutral');pay(0);say(S.c.coupon);hud();return couponEvt(S.c)}
@@ -734,7 +756,7 @@ $('serve').onclick=()=>{
 
 let hold=false,sv=0,smileLoop=null,_mlag=0;
 // 후반: 손을 떼도 얼굴이 웃음을 안 멈춤
-window.__dbg={get S(){return S},endDay:()=>endDay(),cu:k=>{$('closeup').hidden=false;drawCloseup($('cuC'),k)},meV:v=>meV(v),drawMe:v=>drawMe(v)};function meV(v){const d=dist();if(DAYS[S.day]&&DAYS[S.day].newbie)return v;if(d>=4)return 101;if(d>=3)return 100;if(d===2){_mlag=Math.max(v,_mlag-.8);return _mlag}return v}
+window.__dbg={get S(){return S},SC,endDay:()=>endDay(),cu:k=>{$('closeup').hidden=false;drawCloseup($('cuC'),k)},meV:v=>meV(v),drawMe:v=>drawMe(v)};function meV(v){const d=dist();if(DAYS[S.day]&&DAYS[S.day].newbie)return v;if(d>=4)return 101;if(d>=3)return 100;if(d===2){_mlag=Math.max(v,_mlag-.8);return _mlag}return v}
 const hb=$('hold');
 const down=e=>{e.preventDefault();hold=true;hb.classList.add('down')},up=()=>{hold=false;hb.classList.remove('down')};
 hb.addEventListener('pointerdown',down);['pointerup','pointercancel','pointerleave'].forEach(t=>hb.addEventListener(t,up));
@@ -759,11 +781,11 @@ async function smilePhase(){
   if(D().melt){const tgt=(li+1)/D().jin().length,st=SC.melt;for(let k=1;k<=20;k++){setTimeout(()=>{SC.melt=st+(tgt-st)*k/20},k*120)}}
   if(PL[li]&&PL[li]!==l){await wait(1100);say(PL[li]);await wait(260);say(l);await wait(1240)}else await wait(2600)
   if(li===1&&dist()>=2&&!D().melt)await closeup(dist()>=4?1700:dist()>=3?1200:450)}
- clearInterval(smileLoop);const avg=n?sum/n:0;
+ clearInterval(smileLoop);const avg=n?sum/n:0;recSmile(avg);
  S.sat-=Math.round((100-avg)*.25)+5;
  $('smileTip').textContent=D().endTip||(avg>=70?'잘 참았어요.':'표정이 굳었어요.');
- if(!D().noCard){const cd=$('card');cd.className='';void cd.offsetWidth;cd.className='fly';snd(700,.06,'square',.05);setTimeout(()=>cd.className='',1300)}
- pay(0);say(D().bye||'다신 안 와.',D().melt?'나':undefined);hud();
+ if(!D().noCard){SC.card={t0:performance.now(),hit:0};snd(500,.05,'square',.05)}
+ pay(0);say(D().bye||'다신 안 와.',D().melt?'전 알바생':undefined);hud();
  await wait(400);sv=0;drawMe(0);
  await exitCust();
  $('smile').classList.remove('on');$('controls').style.display='';$('smileTip').textContent='버튼을 꾹 누르고 있으면 웃어요.';hb.textContent='꾹 눌러서 웃기';
@@ -774,7 +796,7 @@ async function smilePhase(){
 
 async function cctvEnd(){
  S.phase='ending';SC.cam2=0;$('bubble').classList.remove('on');$('sorry').classList.remove('on');
- const B=$('big'),T=$('bigT'),C=$('bigC'),BS=$('bigSay');T.innerHTML=['손님은 없었다.','주문하는 목소리도, 대답하는 목소리도','전부 내 목소리였다.'].map(t=>`<p>${t}</p>`).join('');
+ const B=$('big'),T=$('bigT'),C=$('bigC'),BS=$('bigSay');T.innerHTML='';
  B.hidden=false;snd(60,2,'sine',.08);const t0=performance.now();let ph=0,run=1;
  const anim=()=>{if(!run)return;drawReveal(C,performance.now()-t0,ph);requestAnimationFrame(anim)};anim();
  const tk=setInterval(()=>{$('bigCam').textContent='CAM 01 · 일 15:00:0'+(ph%3)},700);
@@ -783,11 +805,21 @@ async function cctvEnd(){
  for(const p of T.children){await wait(1600);p.classList.add('on')}
  await wait(2600);run=0;clearInterval(tk);B.hidden=true;SC.look=null;S.c=null;S.cam2=0;endDay();
 }
+function recSmile(a){if(D().newbie)return;store.set('smS',String((+store.get('smS')||0)+a));store.set('smN',String((+store.get('smN')||0)+1))}
+function smileAvg(){const n=+store.get('smN')||0;return n?(+store.get('smS')||0)/n:50}
+const ENDS={loop:'해피데이',hospital:'진료실',smile:'웃는 얼굴',empty:'빈자리'};
+function seenEnd(k){let a=[];try{a=JSON.parse(store.get('ends')||'[]')}catch(e){}if(!a.includes(k))a.push(k);store.set('ends',JSON.stringify(a));return a.length}
+async function showEnd(k,lines){S.phase='ending';const n=seenEnd(k);await wait(400);const F=$('fin'),T=$('finT');
+ T.innerHTML=[...lines,'',`<span style="font-family:Jua;font-size:30px;color:#f08a7e">END</span>`,`<span style="font-size:13px;color:#777">엔딩 · ${ENDS[k]} (${n}/4)</span>`].map(t=>`<p style="margin:0;opacity:0;transition:opacity 1.4s">${t||'&nbsp;'}</p>`).join('');
+ F.hidden=false;snd(220,1.5,'sine',.05);for(const p of T.children){await wait(1400);p.style.opacity=1}await wait(1000);$('finBtn').style.opacity=1}
+async function endingChoice(k){$('home').hidden=true;
+ if(k==='hospital')return showEnd('hospital',['[마음숲의원] 예약 확인되었습니다.','','대기실은 조용했다.','아무도 웃으라고 하지 않았다.','',`……${esc(NAME||'')} 님, 웃으면서 들어오세요.`]);
+ if(smileAvg()>=70){const o=$('closeup');o.querySelector('p').textContent='';o.hidden=false;const t0=performance.now();await new Promise(r=>{const f=()=>{const e=(performance.now()-t0)/3600;drawCloseup($('cuC'),Math.min(1,.4+e));if(e<1)setTimeout(f,90);else r()};f()});o.hidden=true;o.querySelector('p').textContent='웃었다.';
+  return showEnd('smile',['휴대폰을 껐다.','검은 화면에 내 얼굴이 비쳤다.','웃고 있었다.','','멈추지 않는다.'])}
+ return showEnd('empty',['휴대폰을 껐다.','','다음 날 오후 3시, 가게 앞을 지나갔다.','카운터에 누가 서 있었다.','','웃고 있었다.'])}
 async function loopEnd(){
  S.phase='ending';store.set('loops',String((+store.get('loops')||0)+1));
- await wait(600);const F=$('fin'),T=$('finT');T.innerHTML=['카페 해피데이는','오늘도 알바생을 구합니다.','','<span style="font-family:Jua;font-size:30px;color:#f08a7e">END</span>'].map(t=>`<p style="margin:0;opacity:0;transition:opacity 1.4s">${t||'&nbsp;'}</p>`).join('');
- F.hidden=false;snd(220,1.5,'sine',.05);for(const p of T.children){await wait(1500);p.style.opacity=1}
- await wait(1200);$('finBtn').style.opacity=1;
+ return showEnd('loop',['카페 해피데이는','오늘도 알바생을 구합니다.']);
 }
 $('finBtn').onclick=()=>{if($('finBtn').style.opacity!=='1')return;SC.melt=0;$('fin').hidden=true;$('finBtn').style.opacity=0;allR.length=0;drawMe(0);startDay(1)};
 function endDay(){
@@ -809,7 +841,12 @@ $('goHome').onclick=async()=>{
  const eb=$('endBtn');eb.classList.remove('on');eb.textContent=D().nextLabel||(DAYS[S.day+1]?`${S.day+1}일차 출근하기`:`${S.day+1}일차 — 준비 중`);
  $('noti').style.opacity=1;snd(880,.08);
  const ps=[...m.children];let k=0;const H=$('home');let hint=$('tapHint');if(!hint){hint=document.createElement('div');hint.id='tapHint';hint.textContent='화면을 눌러 계속 ▼';H.appendChild(hint)}hint.style.display='';
- const adv=()=>{if(k<ps.length){ps[k++].classList.add('on');snd(300,.04,'triangle',.03)}if(k>=ps.length){setTimeout(()=>eb.classList.add('on'),450);hint.style.display='none';H.removeEventListener('click',adv)}};
+ let ec=$('endChoice');if(ec)ec.remove();
+ if(S.day===7){eb.style.display='none';ec=document.createElement('div');ec.id='endChoice';ec.style.cssText='display:flex;flex-direction:column;gap:8px;padding:0 22px 18px;opacity:0;transition:opacity .6s';
+  ec.innerHTML=`<button class="btn" data-k="go">그래도 가게에 간다</button><button class="btn" data-k="hospital">병원 문자에 답장한다</button><button class="btn" data-k="off">휴대폰을 끈다</button>`;eb.after(ec);
+  ec.onclick=e=>{const b=e.target.closest('button');if(!b||ec.style.opacity!=='1')return;ec.remove();eb.style.display='';if(b.dataset.k==='go')startDay(8);else endingChoice(b.dataset.k)}}
+ else eb.style.display='';
+ const adv=()=>{if(k<ps.length){ps[k++].classList.add('on');snd(300,.04,'triangle',.03)}if(k>=ps.length){setTimeout(()=>{eb.classList.add('on');const e2=$('endChoice');if(e2)e2.style.opacity='1'},450);hint.style.display='none';H.removeEventListener('click',adv)}};
  await wait(300);adv();H.addEventListener('click',adv);
 };
 $('endBtn').onclick=()=>{if(!$('endBtn').classList.contains('on'))return;if(DAYS[S.day+1])startDay(S.day+1);else $('endBtn').textContent=(S.day+1)+'일차는 다음 업데이트에서 이어져요'};
@@ -820,7 +857,7 @@ $('rcpt').onclick=()=>$('rcpt').hidden=true;
 let bi=0;
 function bossNext(){const B=D().boss;$('bossAv').style.visibility=D().bossAbsent?'hidden':'';document.querySelector('#boss .who').textContent=D().bossAbsent?'':'곰 사장님';if(bi>=B.length){$('boss').hidden=true;next();return}{const t=B[bi++]();$('bossTxt').textContent=dist()>=5?glitch(t,.12):t}snd(660,.06,'triangle')}
 $('boss').onclick=bossNext;
-function startDay(d){reset(d);bi=0;SC.melt=0;SC.dead=[];SC.drips=[];SC.cam2=0;$('app').className=dist()>=3?'dist'+Math.min(5,dist()):'';hud();drawCup();$('home').hidden=true;$('title').hidden=true;$('clock').textContent=D().wd+' 15:00';$('boss').hidden=false;bossNext()}
+function startDay(d){if(d===1){store.set('smS','0');store.set('smN','0')}reset(d);bi=0;SC.melt=0;SC.dead=[];SC.drips=[];SC.cam2=0;$('app').className=dist()>=3?'dist'+Math.min(5,dist()):'';hud();drawCup();$('home').hidden=true;$('title').hidden=true;$('clock').textContent=D().wd+' 15:00';$('boss').hidden=false;bossNext()}
 const audio=()=>{try{if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}};
 $('start').onclick=()=>{audio();startDay(1)};
 const saved=Math.min(+store.get('day')||1,7);if(saved>=2){$('start2').hidden=false;$('start2').textContent=saved+'일차부터 하기'}
